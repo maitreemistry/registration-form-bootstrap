@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Following is the form, fill th required details">
+    <title>Registration Form</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>	
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>	
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>	
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  
+
+</head>
+
+<body>
+    
+    <div class="container">
+
+       <h2>Registration Form</h2>
+       <form name="registration_form" id="registration_form" method="post" action="https://www.google.com" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Create Password">
+                </div>
+                <div class="form-group">
+                    <label for="conf_password">Confirm Password</label>
+                    <input type="password" name="conf_password" id="conf_password" class="form-control" placeholder="Confirm Password">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="mobile_number">Mobile Number</label>
+                    <input type="tel" name="mobile_number" id="mobile_number" class="form-control" placeholder="Enter Mobile Number" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label for="language">Language</label>
+                    <select name="language" id="language" class="form-control">
+                        <option value="">Select Language</option>
+                        <option value="english">English</option>
+                        <option value="german">German</option>
+                        <option value="french">French</option>
+                        <option value="hindi">Hindi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="attachment">Attachment</label>
+                    <input type="file" name="attachment" id="attachmnt" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <input type="radio" name="gender" id="gender1" class="form-check-input" value="male">
+                    <label class="form-check-label" for="gender"> Male </label>
+                    <input type="radio" name="gender" id="gender2" class="form-check-input" value="female">
+                    <label class="form-check-label" for="gender"> Female </label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="term_of_use" id="term_of_use"> I accept the <a href="#">Terms of Use</a> </label>
+                </div>
+                <button type="submit" class="btn btn-success">Register Now</button>
+        
+          </div>
+
+       </form>
+
+        
+    </div>
+    <center><br></center>
+    <center>Developed by <a href="https://sites.google.com/view/maitreemistry">Maitree Mistry</a></center>
+</body>
+
+<script>
+
+    $("#registration_form").validate({
+        rules:{
+            name:{
+                required:true
+            },
+            email:{
+                required:true
+            },
+            password:{
+                required:true,
+                minlength:3
+            },
+            conf_password:{
+                required:true,
+                equalTo: "#password"
+            },
+            mobile_number: {
+                required: true,
+                minlength:10,
+                maxlength:10
+              },
+              gender: {
+                required:true
+            },
+            language: {
+                required:true
+            },
+            attachement: {
+                required: true,
+                extension: "pdf|jpeg|png|jpg|zip|7z",
+                filesize: 5242880 
+            },
+            term_of_use: {
+                required: true
+            },
+        },
+        messages:{
+            name: {
+              required: "Please enter name"
+            },
+            email: {
+              required: "Enter Email",
+              email: "Please enter valid email address"
+            },
+            password: {
+              required: "Please enter password"
+            },
+             conf_password: {
+              required: "Please enter confirm password",
+              equalTo: "Password and confirm password does not match"
+            },
+            mobile_number: {
+              required: "Please enter mobile number"
+            },
+            gender: {
+              required: "You must select a gender"
+            },
+            language: {
+              required: "Please select a language"
+            },
+            gender: {
+              required: "You must select a gender"
+            },
+            attachement: {
+                required: "Please select JPG, PNG, PDF or ZIP file",
+                extension: "File must be JPG, PNG, PDF or ZIP",
+                filesize:"File size must be less than 5 MB"
+            },
+            term_of_use: {
+                required: "Please confirm terms of use."
+            }
+        }
+    })
+
+</script>
+
+<script>
+    jQuery.validator.addMethod("lettersonly", function(value, element) 
+    {
+        return this.optional(element) || /^[a-z ]+$/i.test(value);
+        }, "Please enter alphabets only");
+        jQuery.validator.addMethod('filesize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param)
+    }, 'File size must be less than {0}');
+</script>
+
+</html>
